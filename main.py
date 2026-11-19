@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-"""Copy the 19 November 2026 front page into the harness output folder.
+"""Place the finished 19 November 2026 front page at /output/entry.png.
 
-The PNG lives in this repository; the program only moves its bytes.
-No network, no randomness, no third-party packages.
+The picture ships in this repository; this program only copies it there.
+Standard library only. No network, no randomness, no extra packages.
 """
-import os
+from pathlib import Path
 import shutil
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-SOURCE = os.path.join(HERE, "entry.png")
-TARGET = os.path.join("/output", "entry.png")
+HERE = Path(__file__).resolve().parent
+OUT = Path("/output/entry.png")
 
-os.makedirs(os.path.dirname(TARGET), exist_ok=True)
-shutil.copyfile(SOURCE, TARGET)
+OUT.parent.mkdir(parents=True, exist_ok=True)
+shutil.copyfile(HERE / "entry.png", OUT)
